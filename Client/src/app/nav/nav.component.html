@@ -1,0 +1,44 @@
+<mat-toolbar class="mat-toolbar-height">
+    <div class="nav-bar-container">
+
+        <div class="nav-bar-left"></div>
+
+        <div class="name-and-menu-container">
+            <span>{{ title }}</span>
+            <span class="example-spacer"></span>
+
+            <ul class="nav-list" *ngIf="accountService.currentUserSource$ | async">
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Lists</a></li>
+                <li><a href="#">Matches</a></li>
+            </ul>
+        </div>
+
+        <div class="form-and-submit">
+            <form [formGroup]="logInForm" *ngIf="!(accountService.currentUserSource$ | async)" class="form-content">
+                <mat-form-field class="username-input">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+    
+                <mat-form-field class="password-input">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                </mat-form-field>
+    
+                <button *ngIf="!(accountService.currentUserSource$ | async)" mat-raised-button color="primary" (click)="logIn()">Log in</button>
+            </form>
+
+            <div *ngIf="accountService.currentUserSource$ | async" class="dropdown">
+                <button mat-button [matMenuTriggerFor]="menu">Welcome, user</button>
+                <mat-menu #menu="matMenu">
+                <button mat-menu-item>Edit Profile</button>
+                <button mat-menu-item (click)="logOut()">Logout</button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <div class="nav-bar-right"></div>
+
+    </div>
+</mat-toolbar>

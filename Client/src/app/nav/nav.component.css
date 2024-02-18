@@ -1,0 +1,65 @@
+.nav-list {
+    list-style: none;
+    display: flex;
+    column-gap: 8px;
+}
+
+.nav-list > li {
+    font-weight: 100;
+}
+
+.form-and-submit {
+    display: flex;
+    /* column-gap: 8px; */
+    /* align-items: center; */
+    /* align-self: flex-end; */
+    height: 100%;
+}
+
+.form-content {
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+    align-self: flex-end;
+    height: 100%;
+}
+
+.nav-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.username-input, .password-input {
+    align-self: flex-end;
+}
+
+.name-and-menu-container {
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+
+.mat-toolbar-height {
+    height: 100px;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+.nav-bar-left, .nav-bar-right {
+    background-color: darkorchid;
+    flex: 1;
+}
+
+.dropdown {
+    align-self: center;
+}
+
+.form-and-submit {
+    flex: 2;
+}

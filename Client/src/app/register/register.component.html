@@ -1,0 +1,26 @@
+<div class="register-container">
+    <h1 class="register-form-title">Sign up</h1>
+    <mat-divider color="secondary"></mat-divider>
+
+    <div class="content-container">
+        <div class="left-of-form"></div>
+        <form [formGroup]="registerForm" class="form-container">
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password">
+            </mat-form-field>
+
+            <div class="button-container">
+                <button mat-raised-button color="primary" (click)="register()">Sign up</button>
+                <button mat-button color="primary" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+        <div class="right-of-form"></div>
+        
+    </div>
+</div>
