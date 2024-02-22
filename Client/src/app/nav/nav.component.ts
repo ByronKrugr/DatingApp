@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../_services/account.service';
-import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
@@ -11,15 +10,19 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { User } from '../_models/user';
+import { Router, RouterLink } from '@angular/router';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarModule, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { SharedModule } from '../_modules/shared.module';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  providers: [AccountService],
+  providers: [],
   imports: [
-    HttpClientModule, CommonModule, MatMenuModule,
+    CommonModule, MatMenuModule,
     MatIconModule, MatToolbarModule, MatButtonModule, 
-    MatFormFieldModule, MatInputModule, ReactiveFormsModule
+    MatFormFieldModule, MatInputModule, ReactiveFormsModule,
+    RouterLink, MatSnackBarModule, SharedModule
   ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
@@ -27,35 +30,42 @@ import { User } from '../_models/user';
 export class NavComponent {
   public title = 'Dating app';
   public logInForm!: FormGroup;
+  private horizontalPos: MatSnackBarHorizontalPosition = 'end';
+  private verticalPos: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
-    public accountService: AccountService
+    public accountService: AccountService,
+    private router: Router, 
+    private snackBar: MatSnackBar
     ) {
   }
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
-      username: new FormControl('bob3'),
-      password: new FormControl('password1')
+      username: new FormControl('daniela'),
+      password: new FormControl('Password1!')
     });
   }
 
   logIn() {
     this.accountService.login(this.logInForm.value).subscribe(
-      (res) => {        
-        console.log(res);
-    },
+      _ => this.router.navigateByUrl("/members"),
       error => {
-        console.error(error);
+        debugger;
+        this.snackBar.open(error.error, "", {
+          horizontalPosition: this.horizontalPos,
+          verticalPosition: this.verticalPos,
+          duration: 5000,
+          panelClass: ['error-snackbar']
+        })
       },
-      () => {
-        console.log("complete");
-      }
+      () => console.log("complete")
     )
   }
 
   logOut() {
     this.accountService.logout();
+    this.router.navigateByUrl("/")
   }
 
 }

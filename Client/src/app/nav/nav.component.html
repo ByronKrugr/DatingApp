@@ -8,9 +8,9 @@
             <span class="example-spacer"></span>
 
             <ul class="nav-list" *ngIf="accountService.currentUserSource$ | async">
-                <li><a href="#">Messages</a></li>
-                <li><a href="#">Lists</a></li>
-                <li><a href="#">Matches</a></li>
+                <li><a routerLink="/messages">Messages</a></li>
+                <li><a routerLink="/lists">Lists</a></li>
+                <li><a routerLink="/members">Matches</a></li>
             </ul>
         </div>
 

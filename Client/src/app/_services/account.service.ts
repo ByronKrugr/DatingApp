@@ -47,3 +47,8 @@ export class AccountService {
     this.currentUserSource.next(null);
   }
 }
+
+// We define a factory function that takes HttpClient instance
+export function accountServiceFactory(http: HttpClient): AccountService {
+  return new AccountService(http);
+}

@@ -6,22 +6,29 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { AccountService } from '../_services/account.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarModule, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { SharedModule } from '../_modules/shared.module';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule,MatButtonModule, MatButtonModule, 
     FormsModule, MatFormFieldModule, MatInputModule, 
-    ReactiveFormsModule, MatDividerModule],
-    providers: [AccountService],
+    ReactiveFormsModule, MatDividerModule, MatSnackBarModule, 
+    SharedModule],
+    providers: [],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit{
   @Output() cancelRegister = new EventEmitter();
   public registerForm!: FormGroup;
+  private horizontalPos: MatSnackBarHorizontalPosition = 'end';
+  private verticalPos: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(private accountService: AccountService) {
+    constructor(
+      private accountService: AccountService,
+      private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -38,6 +45,10 @@ export class RegisterComponent implements OnInit{
       },
       error => {
         console.error(error);
+        this.snackBar.open(error.error, "", {
+          horizontalPosition: this.horizontalPos,
+          verticalPosition: this.verticalPos
+        })
       }
     );
   }

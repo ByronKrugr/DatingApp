@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterComponent } from '../register/register.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RegisterComponent, CommonModule, MatButtonModule, 
-    HttpClientModule],
+  imports: [RegisterComponent, CommonModule, MatButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
