@@ -6,14 +6,13 @@ import { AccountService } from './_services/account.service';
 import { User } from './_models/user';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './_modules/shared.module';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   providers: [],
   imports: [CommonModule, RouterOutlet, NavComponent, 
-    HomeComponent, SharedModule, HttpClientModule],
+    HomeComponent, SharedModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
