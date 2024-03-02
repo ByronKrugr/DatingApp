@@ -42,8 +42,8 @@ export class NavComponent {
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
-      username: new FormControl('daniela'),
-      password: new FormControl('Password1!')
+      username: new FormControl('celina'),
+      password: new FormControl('BoredApe1!')
     });
   }
 

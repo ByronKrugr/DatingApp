@@ -1,0 +1,19 @@
+.members-list-container {
+    display: flex;
+}
+
+.members-container {
+    display: flex;
+    flex: 5;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 24px;
+}
+
+.members-container {
+    padding-top: 24px;
+}
+
+.lhs-empty-space, .rhs-empty-space {
+    flex: 1;
+}

@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   users: any;
 
   constructor(private http: HttpClient) {
-  }
+  } 
 
   ngOnInit() {
     this.getUsers();

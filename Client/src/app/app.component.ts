@@ -6,13 +6,16 @@ import { AccountService } from './_services/account.service';
 import { User } from './_models/user';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './_modules/shared.module';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   providers: [],
   imports: [CommonModule, RouterOutlet, NavComponent, 
-    HomeComponent, SharedModule],
+    HomeComponent, SharedModule, NotFoundComponent,
+    ServerErrorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -28,6 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
+    debugger;
     const userInStorage = localStorage.getItem('user');
     if (!userInStorage) return;
     const user: User = JSON.parse(userInStorage);

@@ -6,7 +6,8 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { HttpClient } from '@angular/common/http';
 import { SharedModule } from '../_modules/shared.module';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
+  debugger;
   const accountService = inject(AccountService);
   const snackBar = inject(MatSnackBar)
   const horizontalPos: MatSnackBarHorizontalPosition = 'end';

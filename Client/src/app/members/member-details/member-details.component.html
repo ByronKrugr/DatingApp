@@ -1,1 +1,56 @@
-<p>member-details works!</p>
+<div *ngIf="member" class="member-details-container">
+    <div class="lhs-content"></div>
+
+    <div class="member-details-content-container">
+        <mat-card *ngIf="member" class="example-card">
+            <img src="{{ member.photoUrl || './assets/user.png' }}">
+            <mat-card-content>
+                <div class="member-details-content-container">
+                    <div class="location-container">
+                        <p class="member-info-bold">Location:</p>
+                        <p>{{ member.city }}, {{ member.country }}</p>
+                    </div>
+                    <div class="age-container">
+                        <p class="member-info-bold">Age:</p>
+                        <p>{{ member.age }}</p>
+                    </div>
+                    <div class="last-active-container">
+                        <p class="member-info-bold">Last active:</p>
+                        <p>{{ member.lastActive }}</p>
+                    </div>
+                    <div class="member-since-container">
+                        <p class="member-info-bold">Member since:</p>
+                        <p>{{ member.created }}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="buttons-container">
+                    <button class="like-btn" mat-flat-button color="primary">Like</button>
+                    <button class="message-btn" mat-flat-button color="accent">Messages</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="rhs-content">
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="About {{ member.knownAs }}">
+                <h4>Description</h4>
+                <p>{{ member.introduction }}</p>
+                <h4>Looking for</h4>
+                <p>{{ member.lookingFor }}</p>
+            </mat-tab>
+            <mat-tab label="Interests">
+                <h4>Interests</h4>
+                <p>{{ member.interests }}</p>
+            </mat-tab>
+            <mat-tab label="Photos" #photosTab>
+                <gallery [items]="images" class="gallery"></gallery>
+            </mat-tab>
+            <mat-tab label="Messages">
+                <p>Messages go here</p>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="right-most-content"></div>
+</div>

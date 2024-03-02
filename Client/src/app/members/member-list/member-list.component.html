@@ -1,1 +1,7 @@
-<p>member-list works!</p>
+<div class="members-list-container">
+    <div class="lhs-empty-space"></div>
+    <div *ngIf="members" class="members-container">
+        <app-member-card *ngFor="let member of members" [member]="member"></app-member-card>
+    </div>
+    <div class="rhs-empty-space"></div>
+</div>

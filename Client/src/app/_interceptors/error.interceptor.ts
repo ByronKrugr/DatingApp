@@ -9,8 +9,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const horizontalPos: MatSnackBarHorizontalPosition = 'end';
   const verticalPos: MatSnackBarVerticalPosition = 'bottom';
-  debugger;
-  console.log("===============================================================");
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
