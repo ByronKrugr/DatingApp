@@ -15,7 +15,7 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
-app.UseAuthentication();
+app.UseAuthentication(); // these 2 methods are known by .NET to be relevant to the JWT-based auth and authz
 app.UseAuthorization();
 
 app.MapControllers();

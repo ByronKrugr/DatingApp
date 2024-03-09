@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
   standalone: true,
   imports: [CommonModule, MemberCardComponent, MatCardModule],
   templateUrl: './member-list.component.html',
-  styleUrl: './member-list.component.css'
+  styleUrl: './member-list.component.scss'
 })
 export class MemberListComponent implements OnInit {
   public members: Member[] = [];

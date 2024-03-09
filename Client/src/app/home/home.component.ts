@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [RegisterComponent, CommonModule, MatButtonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   public registerMode = false;
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   } 
 
   ngOnInit() {
-    this.getUsers();
+    // this.getUsers();
   }
 
   getUsers() {

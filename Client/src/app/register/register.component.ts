@@ -18,7 +18,7 @@ import { SharedModule } from '../_modules/shared.module';
     SharedModule],
     providers: [],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit{
   @Output() cancelRegister = new EventEmitter();

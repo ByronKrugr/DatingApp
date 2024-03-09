@@ -1,7 +1,7 @@
 <mat-card *ngIf="member" class="example-card">
-    <img mat-card-image src="{{ member.photoUrl || './assets/user.png' }}" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="{{ member.photoUrl || './assets/user.png' }}" alt="Member photo">
+    
     <div class="button-container">
-
         <button mat-icon-button matTooltip="Primary" routerLink="/members/{{member.userName}}">
             <mat-icon>favorite</mat-icon>
         </button>
@@ -11,9 +11,9 @@
         <button mat-icon-button matTooltip="Primary">
             <mat-icon>favorite</mat-icon>
         </button>
-
     </div>
-    <mat-card-content>
+
+    <mat-card-content class="card-text-content">
         <div class="member-card-content-container">
             <div class="member-name-container">
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
@@ -24,4 +24,5 @@
             </div>
         </div>
     </mat-card-content>
+
 </mat-card>

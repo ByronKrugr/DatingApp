@@ -8,6 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from './_modules/shared.module';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { BusyService } from './_services/busy.service';
+import { Observable } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-root',
@@ -15,19 +18,23 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
   providers: [],
   imports: [CommonModule, RouterOutlet, NavComponent, 
     HomeComponent, SharedModule, NotFoundComponent,
-    ServerErrorComponent],
+    ServerErrorComponent, MatProgressSpinnerModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  // public isBusy$ = this.busyService.busySubject$;
+  public isBusy$: Observable<boolean> | undefined;
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private busyService: BusyService
     ) {
   }
   
   ngOnInit(): void {
     this.setCurrentUser();
+    this.listenToBusy();
   }
 
   setCurrentUser() {
@@ -36,5 +43,9 @@ export class AppComponent implements OnInit {
     if (!userInStorage) return;
     const user: User = JSON.parse(userInStorage);
     this.accountService.setCurrentUser(user);
+  }
+
+  listenToBusy() {
+    this.isBusy$ = this.busyService.busySubject$;
   }
 }

@@ -14,7 +14,7 @@ import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
   imports: [CommonModule, MatCardModule, MatButtonModule,
     MatTabsModule, GalleryModule],
   templateUrl: './member-details.component.html',
-  styleUrl: './member-details.component.css'
+  styleUrl: './member-details.component.scss'
 })
 export class MemberDetailsComponent implements OnInit {
   public member: Member | undefined;

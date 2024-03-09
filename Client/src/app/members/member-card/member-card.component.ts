@@ -11,7 +11,7 @@ import { Route, Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule, RouterModule],
   templateUrl: './member-card.component.html',
-  styleUrl: './member-card.component.css'
+  styleUrl: './member-card.component.scss'
 })
 export class MemberCardComponent {
   @Input() member: Member | undefined;

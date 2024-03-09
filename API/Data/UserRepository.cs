@@ -26,7 +26,7 @@ public class UserRepository : IUserRepository
         _context.Entry(user).State = EntityState.Modified;
     }
 
-    public async Task<bool> SaveAllAsync(AppUser user)
+    public async Task<bool> SaveAllAsync()
     {
         return await _context.SaveChangesAsync() > 0;
     }
@@ -43,7 +43,7 @@ public class UserRepository : IUserRepository
         return await _context.Users.FindAsync(id);
     }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+    public async Task<AppUser> GetUserByUsernameAsync(string username)
     {
         return await _context.Users
             .Include(p => p.Photos)

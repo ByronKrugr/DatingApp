@@ -14,11 +14,11 @@ public static class IdentitiyServiceExtensions
         .AddJwtBearer(options => {
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuerSigningKey = true,
+                ValidateIssuerSigningKey = true, // specify that we want the token to be validated against the encryption
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding
                     .UTF8.GetBytes(config["TokenKey"])),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateIssuer = false, // we did not add this info to the token itself so it is not available for validation
+                    ValidateAudience = false // "
             };
         });
 

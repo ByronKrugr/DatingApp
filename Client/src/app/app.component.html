@@ -1,6 +1,7 @@
+<div class="spinner-container">
+    <mat-spinner *ngIf="isBusy$ | async"></mat-spinner>
+</div>
+
 <app-nav></app-nav>
 
-<!-- <app-home></app-home> -->
-
 <router-outlet></router-outlet>
-<!-- <h1>{{ users }}</h1> -->

@@ -25,7 +25,7 @@ import { SharedModule } from '../_modules/shared.module';
     RouterLink, MatSnackBarModule, SharedModule
   ],
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+  styleUrl: './nav.component.scss'
 })
 export class NavComponent {
   public title = 'Dating app';

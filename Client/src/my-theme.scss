@@ -1,0 +1,148 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$main-primary-palette: (
+ 50: #fff4e1,
+ 100: #ffe2b3,
+ 200: #ffd082,
+ 300: #ffbc50,
+ 400: #ffad29,
+ 500: #ff9e05,
+ 600: #ff9204,
+ 700: #fc8204,
+ 800: #f77103,
+ 900: #ee5602,
+ A100: #ffd180,
+ A200: #ffab40,
+ A400: #ff9100,
+ A700: #ff6d00,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: white,
+   400: white,
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);
+
+$main-secondary-palette: (
+ 50: #e7f5e5,
+ 100: #c5e6c0,
+ 200: #9fd698,
+ 300: #77c66d,
+ 400: #57ba4c,
+ 500: #35ae27,
+ 600: #2b9f1e,
+ 700: #1b8d11,
+ 800: #047c00,
+ 900: #005e00,
+ A100: #b9f6ca,
+ A200: #69f0ae,
+ A400: #00e676,
+ A700: #00c853,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: white,
+   400: white,
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);
+
+$primary2-palette: (
+ 50: orange,
+ 100: orange,
+ 200: orange,
+ 300: orange,
+ 400: orange,
+ 500: orange,
+ 600: orange,
+ 700: orange,
+ 800: orange,
+ 900: orange,
+ A100: orange,
+ A200: orange,
+ A400: orange,
+ A700: orange,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: white,
+   400: white,
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);
+
+$main-primary: mat.define-palette($main-primary-palette, 700);
+$primary2: mat.define-palette($primary2-palette, 700);
+$main-accent: mat.define-palette($main-secondary-palette, 900, A200, A100, A400);
+$accent2: mat.define-palette(mat.$red-palette, A200, A100, A400);
+
+// The "warn" palette is optional and defaults to red if not specified.
+$main-warn: mat.define-palette(mat.$orange-palette);
+
+// $my-primary: mat.define-palette(mat.$indigo-palette, 500);
+// $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The "warn" palette is optional and defaults to red if not specified.
+// $my-warn: mat.define-palette(mat.$red-palette);
+
+$main-theme: mat.define-light-theme((
+ color: (
+   primary: $main-primary,
+   accent: $main-accent,
+   warn: $main-warn,
+ ),
+ typography: mat.define-typography-config(),
+ density: 0,
+));
+@include mat.all-component-themes($main-theme);
+
+$main-theme-dark: mat.define-dark-theme((
+ color: (
+   primary: $main-primary,
+   accent: $main-accent,
+   warn: $main-warn,
+ ),
+ typography: mat.define-typography-config(),
+ density: 10,
+));
+// @include mat.all-component-themes($main-theme-dark);
+
+$toolbar-theme: mat.define-dark-theme((
+ color: (
+   primary: $primary2,
+   accent: $main-accent,
+   warn: $main-warn,
+ ),
+ typography: mat.define-typography-config(),
+ density: -5,
+));
+
+// Toolbar styling
+// @include mat.all-component-colors($my-theme2);
+// @include mat.all-component-densities($my-theme2);
+// @include mat.all-component-typographies($my-theme2);
+// @include mat.all-component-bases($my-theme2);
+
+// @include mat.toolbar-color($toolbar-theme);
+@include mat.toolbar-density($toolbar-theme);
+@include mat.toolbar-typography($toolbar-theme);
+
+// density?
