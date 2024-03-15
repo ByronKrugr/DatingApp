@@ -95,7 +95,7 @@ $main-accent: mat.define-palette($main-secondary-palette, 900, A200, A100, A400)
 $accent2: mat.define-palette(mat.$red-palette, A200, A100, A400);
 
 // The "warn" palette is optional and defaults to red if not specified.
-$main-warn: mat.define-palette(mat.$orange-palette);
+$main-warn: mat.define-palette(mat.$red-palette);
 
 // $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 // $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);

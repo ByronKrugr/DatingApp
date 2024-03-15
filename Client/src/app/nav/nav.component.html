@@ -14,7 +14,7 @@
             </ul>
         </div>
 
-        <div class="form-and-submit">
+        <div class="form-and-menu">
             <form [formGroup]="logInForm" *ngIf="!(accountService.currentUserSource$ | async)" class="form-content">
                 <mat-form-field class="username-input">
                     <mat-label>Username</mat-label>
@@ -28,6 +28,10 @@
     
                 <button *ngIf="!(accountService.currentUserSource$ | async)" mat-raised-button color="primary" (click)="logIn()" color="secondary">Log in</button>
             </form>
+
+            <div *ngIf="(accountService.currentUserSource$ | async) as user" class="photo-container">
+                <img src="{{user.photoUrl}}" alt="user photo">
+            </div>
 
             <div *ngIf="accountService.currentUserSource$ | async" class="dropdown">
                 <button mat-button [matMenuTriggerFor]="menu">Welcome, user</button>

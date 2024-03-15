@@ -8,12 +8,14 @@
     font-weight: 100;
 }
 
-.form-and-submit {
+.form-and-menu {
     display: flex;
     /* column-gap: 8px; */
     /* align-items: center; */
     /* align-self: flex-end; */
     height: 100%;
+    align-items: center;
+    column-gap: 8px;
 }
 
 .form-content {
@@ -62,4 +64,12 @@ a {
 
 .form-and-submit {
     flex: 2;
+}
+
+.photo-container, img{
+    height: 70px;
+}
+
+img {
+    border: 2px solid white;
 }

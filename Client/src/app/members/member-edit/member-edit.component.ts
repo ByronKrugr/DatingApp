@@ -12,13 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarModule, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
   imports: [CommonModule, MatTabsModule, MatButtonModule,
     MatCardModule, FormsModule, MatFormFieldModule, MatInputModule, 
-    ReactiveFormsModule, MatSnackBarModule],
+    ReactiveFormsModule, MatSnackBarModule, PhotoEditorComponent],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.scss'
 })

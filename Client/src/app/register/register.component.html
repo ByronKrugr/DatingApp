@@ -1,19 +1,38 @@
 <div class="register-container">
     <h1 class="register-form-title">Sign up</h1>
-    <mat-divider color="secondary"></mat-divider>
+    <mat-divider color="primary"></mat-divider>
 
     <div class="content-container">
         <div class="left-of-form"></div>
         <form [formGroup]="registerForm" class="form-container">
-            <mat-form-field>
-                <mat-label>Username</mat-label>
-                <input matInput formControlName="username">
-            </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Password</mat-label>
-                <input matInput formControlName="password">
-            </mat-form-field>
+            <div>
+                <span>I am a:</span>
+                <mat-radio-group formControlName="gender" aria-label="Select an option">
+                    <mat-radio-button value="F">Female</mat-radio-button>
+                    <mat-radio-button value="M">Male</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <app-text-input [formControl]="$any(registerForm.controls['username'])"
+                [label]="'Username'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['knownAs'])"
+                [label]="'Known As'"></app-text-input>
+            <app-date-input [formControl]="$any(registerForm.controls['dateOfBirth'])"
+                [label]="'Date of birth'"></app-date-input>
+            <app-text-input [formControl]="$any(registerForm.controls['password'])"
+                [label]="'Password'" [type]="'password'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])"
+                [label]="'Confirm Password'" [type]="'password'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['city'])"
+                [label]="'City'"></app-text-input>
+            <app-text-input [formControl]="$any(registerForm.controls['country'])"
+                [label]="'Country'"></app-text-input>
+
+            <p>xxx</p>
+            <ul *ngIf="validationErrors">
+                <p>{{validationErrors[0]}}</p>
+                <li *ngFor="let error of validationErrors">{{error}}</li>
+            </ul>
 
             <div class="button-container">
                 <button mat-raised-button color="primary" (click)="register()">Sign up</button>
@@ -23,4 +42,9 @@
         <div class="right-of-form"></div>
         
     </div>
+</div>
+
+<div style="width: 25%;">
+    {{registerForm.value | json}}
+    {{registerForm.status | json}}
 </div>

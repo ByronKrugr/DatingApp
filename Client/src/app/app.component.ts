@@ -11,11 +11,16 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { BusyService } from './_services/busy.service';
 import { Observable } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }}
+  ],
   imports: [CommonModule, RouterOutlet, NavComponent, 
     HomeComponent, SharedModule, NotFoundComponent,
     ServerErrorComponent, MatProgressSpinnerModule],

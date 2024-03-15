@@ -1,0 +1,11 @@
+<mat-form-field class="da-mat-form-field">
+    <mat-label>{{label}}</mat-label>
+    <input matInput [formControl]="control" [matDatepicker]="picker"
+        [min]="maxDate">
+    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    @if (control?.hasError('required')) {
+        <mat-error>{{label}} is required</mat-error>
+    }
+</mat-form-field>

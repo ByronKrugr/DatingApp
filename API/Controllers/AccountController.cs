@@ -7,6 +7,7 @@ using System.Text;
 using API.Interfaces;
 using API.Services;
 using API.Data;
+using AutoMapper;
 
 namespace API.Controllers;
 
@@ -14,11 +15,13 @@ public class AccountController : BaseApiController
 {
     private readonly DataContext _context;
     private readonly ITokenService _tokenSerivce;
+    private readonly IMapper _mapper;
 
-    public AccountController(DataContext context, ITokenService tokenService)
+    public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
     {
         _context = context;
         _tokenSerivce = tokenService;
+        _mapper = mapper;
     }
 
     [HttpPost("register")]
@@ -28,12 +31,11 @@ public class AccountController : BaseApiController
 
         using var hmac = new HMACSHA512();
 
-        var user = new AppUser
-        {
-            UserName = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key
-        };
+        var user = _mapper.Map<AppUser>(registerDto);
+
+        user.UserName = registerDto.Username.ToLower();
+        user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+        user.PasswordSalt = hmac.Key;
 
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
@@ -41,13 +43,16 @@ public class AccountController : BaseApiController
         return new UserDto
         {
             Username = user.UserName,
-            Token = _tokenSerivce.CreateToken(user)
+            Token = _tokenSerivce.CreateToken(user),
+            KnownAs = user.KnownAs
         };
     }
 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto) {
-        var user = await _context.Users.SingleOrDefaultAsync<AppUser>(u => u.UserName == loginDto.UserName);
+        var user = await _context.Users
+            .Include(user => user.Photos)
+            .SingleOrDefaultAsync<AppUser>(u => u.UserName == loginDto.UserName);
 
         if (user == null) return NotFound("Invalid username.");
 
@@ -63,7 +68,9 @@ public class AccountController : BaseApiController
         return new UserDto
         {
             Username = user.UserName,
-            Token = _tokenSerivce.CreateToken(user)
+            Token = _tokenSerivce.CreateToken(user),
+            PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
+            KnownAs = user.KnownAs
         };
     }
 

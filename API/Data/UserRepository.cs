@@ -2,9 +2,6 @@ using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using API.Entities;
 using API.DTOs;
-using System.Collections.Generic;
-using System;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 

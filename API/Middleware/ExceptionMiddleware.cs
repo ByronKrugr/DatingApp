@@ -1,10 +1,6 @@
-using System;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
 using API.Errors;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 
 namespace API.Middleware;
 
@@ -25,7 +21,7 @@ public class ExceptionMiddleware
         try 
         {
             Console.WriteLine("hello world!!!");
-            _next(context);
+            await _next(context);
             Console.WriteLine("hello world!!!");
 
         }

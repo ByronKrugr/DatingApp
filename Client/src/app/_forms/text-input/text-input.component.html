@@ -1,0 +1,13 @@
+<mat-form-field class="da-mat-form-field">
+    <mat-label>{{label}}</mat-label>
+    <input matInput [formControl]="control" type="type">
+    @if (control?.hasError('minlength')) {
+        <mat-error>min length is 12 chars</mat-error>
+    } @else if (control?.hasError('maxlength')) {
+        <mat-error>maxLength is 16 chars</mat-error>
+    } @else if (control?.hasError('required')) {
+        <mat-error>{{label}} is required</mat-error>
+    } @else if (control?.hasError('noMatch')) {
+        <mat-error>{{label}} must match</mat-error>
+    }
+</mat-form-field>
