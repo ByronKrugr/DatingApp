@@ -4,16 +4,43 @@
 
 .members-container {
     display: flex;
+    flex-direction: column;
     flex: 5;
     flex-wrap: wrap;
     column-gap: 24px;
     row-gap: 24px;
-}
-
-.members-container {
     padding-top: 24px;
 }
 
 .lhs-empty-space, .rhs-empty-space {
     flex: 1;
+}
+
+.members-list {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 24px;
+    padding-top: 24px;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    height:100px;
+}
+
+.filter-input {
+    align-self: flex-end;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+button {
+    width: 160px
 }

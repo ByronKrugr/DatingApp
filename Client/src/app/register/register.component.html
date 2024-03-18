@@ -11,6 +11,9 @@
                 <mat-radio-group formControlName="gender" aria-label="Select an option">
                     <mat-radio-button value="F">Female</mat-radio-button>
                     <mat-radio-button value="M">Male</mat-radio-button>
+                    <!-- @if (registerForm.controls['gender']?.hasError('required')) {
+                        <mat-error>Gender is required</mat-error>
+                    } -->
                 </mat-radio-group>
             </div>
             <app-text-input [formControl]="$any(registerForm.controls['username'])"
@@ -28,9 +31,7 @@
             <app-text-input [formControl]="$any(registerForm.controls['country'])"
                 [label]="'Country'"></app-text-input>
 
-            <p>xxx</p>
             <ul *ngIf="validationErrors">
-                <p>{{validationErrors[0]}}</p>
                 <li *ngFor="let error of validationErrors">{{error}}</li>
             </ul>
 
@@ -42,9 +43,4 @@
         <div class="right-of-form"></div>
         
     </div>
-</div>
-
-<div style="width: 25%;">
-    {{registerForm.value | json}}
-    {{registerForm.status | json}}
 </div>

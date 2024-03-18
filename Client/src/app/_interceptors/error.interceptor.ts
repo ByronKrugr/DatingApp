@@ -12,13 +12,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-        debugger;
         if (error) {
           switch (error.status){
             case 400:
               if (error.error.errors) {
                 const modelStateErrors = [];
-                debugger;
                 for (const key in error.error.errors) {
                   if (error.error.errors[key]) {
                     modelStateErrors.push(error.error.errors[key]);

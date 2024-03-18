@@ -6,6 +6,8 @@ using AutoMapper;
 using API.Extensions;
 using System.Security.Claims;
 using API.Entities;
+using API.Helpers;
+using Microsoft.IdentityModel.Tokens;
 // using System.Web.Mvc;
 // using Microsoft.AspNetCore.Identity;
 
@@ -28,9 +30,19 @@ public class UsersController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+    public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
     {
-        var users = await _userRepository.GetMembersAsync();
+        var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        userParams.CurrentUsername = currentUser.UserName;
+
+        if (string.IsNullOrEmpty(userParams.Gender)){
+            userParams.Gender = userParams.Gender == "male" ? "female" : "male";
+        }
+
+        var users = await _userRepository.GetMembersAsync(userParams);
+
+        Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
+
         return Ok(users);
     }
 

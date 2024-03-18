@@ -21,7 +21,8 @@ public class TokenService : ITokenService
     {
         var claims = new List<Claim> // create collection of claims that we want to include in the token
         {
-            new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+            new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
         };
 
         var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512); // create the signing creds that is used to sign the token

@@ -1,8 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../_models/member';
-import { map, of, take } from 'rxjs';
+import { Observable, map, of, take } from 'rxjs';
+import { PaginatedResult } from '../_models/Pagination';
+import { UserParams } from '../_models/UserParams';
+import { AccountService } from './account.service';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +14,88 @@ import { map, of, take } from 'rxjs';
 export class MemberService {
   private baseUrl = environment.apiUrl;
   private members: Member[] = [];
+  private memberCache = new Map();
+  private userParams: UserParams | undefined;
+  private user: User | undefined;
 
-  constructor(private http: HttpClient) { }
-
-  getMembers() {
-    debugger;
-    if (this.members.length > 0) {
-      return of(this.members);
-    }
-    return this.http.get<Member[]>(this.baseUrl + "users").pipe(
-      map(members => this.members = members)
+  constructor(private http: HttpClient, private accountService: AccountService) {
+    this.accountService.currentUserSource$.pipe(take(1)).subscribe(
+      (user) => {
+        if (user) {
+          this.user = user;
+          this.userParams = new UserParams(user);
+        }
+      }
     );
   }
 
-  getMemberByUsername(username: string) {
-    debugger;
-    if (this.members.length > 0) {
-      debugger;
-      return of(this.members.find(m => m.userName === username));
+  getUserParams() {
+    return this.userParams;
+  }
+
+  setUserParams(userParams: UserParams) {
+    this.userParams = userParams
+  }
+
+  resetUserParams() {
+    if (this.user) {
+      this.userParams = new UserParams(this.user);
+      return this.userParams;
     }
+    return this.userParams;
+  }
+
+  getMembers(userParams: UserParams){
+    const res = this.memberCache.get(Object.values(userParams).join('-'));
+    if (res) return of(res);
+
+    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
+    params = params.append('minAge', userParams.minAge);
+    params = params.append('maxAge', userParams.maxAge);
+    params = params.append('gender', userParams.gender);
+    params = params.append('orderBy', userParams.orderBy);
+    
+    return this.getPaginatedList<Member[]>(this.baseUrl + "users", params).pipe(
+      map(
+        res => {
+          this.memberCache.set(Object.values(userParams).join('-'), res);
+          return res;
+        }
+      )
+    );
+  }
+
+  private getPaginatedList<T>(url: string, params: HttpParams) {
+    let paginatedResult: PaginatedResult<T> = new PaginatedResult<T>;
+
+    return this.http.get<T>(url, { observe: 'response', params }).pipe(
+      map(res => {
+        debugger;
+        if (res.body) paginatedResult.result = res.body;
+        const pagination = res.headers.get('Pagination');
+        if (pagination) paginatedResult.pagination = JSON.parse(pagination);
+        return paginatedResult;
+      }
+      ));
+  }
+
+  private getPaginationHeaders(pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+
+    if (pageNumber && pageSize) {
+      params = params.append('pageNumber', pageNumber);
+      params = params.append('pageSize', pageSize);
+    }
+    return params;
+  }
+
+  getMemberByUsername(username: string) {
+    const member = [...this.memberCache.values()]
+      .reduce((arr, e) => arr.concat(e.result), [])
+      .find((m: Member) => m.userName === username)
+
+    if (member) return of(member);
+
     return this.http.get<Member>(this.baseUrl + "users/" + username);
   }
 

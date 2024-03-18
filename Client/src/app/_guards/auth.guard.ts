@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { SharedModule } from '../_modules/shared.module';
 
 export const authGuard: CanActivateFn = () => {
-  debugger;
   const accountService = inject(AccountService);
   const snackBar = inject(MatSnackBar)
   const horizontalPos: MatSnackBarHorizontalPosition = 'end';
@@ -15,7 +14,6 @@ export const authGuard: CanActivateFn = () => {
 
   return accountService.currentUserSource$.pipe(
     map((user) => {
-      debugger;
       // const user = null;
       if (user)
         return true

@@ -1,3 +1,9 @@
+// @use 'sass:map';
+@use '@angular/material' as mat;
+@import './../../../my-theme.scss';
+
+$primary-default: mat.get-theme-color($main-theme, primary, 50);
+
 .member-details-container {
     display: flex;
 }
@@ -65,4 +71,13 @@
 .location-inputs-container {
     display: flex;
     column-gap: 16px;
+}
+
+.dirty-warning {
+    background-color: $primary-default;
+}
+
+.dirty-warning-container {
+    height: 67px;
+    padding-top: 16px
 }

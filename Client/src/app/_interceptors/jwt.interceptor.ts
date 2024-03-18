@@ -8,7 +8,6 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   accountService.currentUserSource$.pipe(take(1)).subscribe(
     (user) => {
-      debugger;
       if (user) {
         req = req.clone({
           setHeaders: {

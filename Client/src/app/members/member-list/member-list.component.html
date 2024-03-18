@@ -1,7 +1,58 @@
 <div class="members-list-container">
     <div class="lhs-empty-space"></div>
     <div *ngIf="members" class="members-container">
-        <app-member-card *ngFor="let member of members" [member]="member"></app-member-card>
+        <form *ngIf="filterForm" [formGroup]="filterForm">
+        <div class="filter-container">
+
+            <p>Age from:</p>
+            <mat-form-field class="filter-input">
+                <input formControlName="minAge" matInput>
+            </mat-form-field> 
+
+            <p>Age to:</p>
+            <mat-form-field class="filter-input">
+                <input formControlName="maxAge" matInput>
+            </mat-form-field> 
+
+            <p>Show:</p>
+            <mat-form-field class="filter-input">
+                <mat-select formControlName="gender">
+                    @for (gender of genders; track gender) {
+                        <mat-option [value]="gender.value">{{gender.displayName}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <div class="button-group">
+                <button
+                    mat-flat-button color="primary"
+                    (click)="applyFilter()">Apply filter</button>
+                <button
+                    mat-flat-button color="accent"
+                    (click)="resetFilter()">Reset filter</button>
+            </div>
+            <div class="button-group">
+                <button
+                    mat-flat-button color="primary"
+                    (click)="orderByLastActive()">Last active</button>
+                <button
+                    mat-flat-button color="primary"
+                    (click)="orderByCreated()">Newest members</button>
+            </div>
+
+        </div>
+        </form>
+        <div class="members-list">
+            <app-member-card *ngFor="let member of members" [member]="member"></app-member-card>
+        </div>
+        <mat-paginator *ngIf="pagination"
+            [length]="pagination.totalItems"
+            [pageSize]="pagination.itemsPerPage"
+            [pageSizeOptions]="[]"
+            aria-label="Select page"
+            (page)="pageChanged($event)"
+            [showFirstLastButtons]="true">
+        </mat-paginator>
     </div>
     <div class="rhs-empty-space"></div>
 </div>

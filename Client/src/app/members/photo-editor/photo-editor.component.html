@@ -1,18 +1,20 @@
 <div>
-    <div *ngIf="member">
-        <div *ngFor="let photo of member.photos">
+    <div *ngIf="member" class="photos-container">
+        <div *ngFor="let photo of member.photos" class="photo-button-group">
             <img src="{{ photo.url }}" alt="">
-            <div>
-                <button mat-button 
+            <div class="button-group">
+                <button mat-flat-button  
                     (click)="setMainPhoto(photo)"
                     [disabled]="photo.isMain"
-                    [ngClass]="photo.isMain ? 'a' : 'b' ">
-                    Main
+                    [ngClass]="photo.isMain ? 'a' : 'b' "
+                    color="accent">
+                    M
                 </button>
-                <button mat-button color="warn"
+                <button mat-flat-button  color="warn"
                     (click)="deletePhoto(photo.id)"
-                    [disabled]="photo.isMain">
-                    Delete
+                    [disabled]="photo.isMain"
+                    color="warn">
+                    D
                 </button>
             </div>
         </div>
@@ -40,6 +42,7 @@
                     <p>Single</p>
                     <input type="file" ng2FileSelect [uploader]="uploader" />
                 </div>
+
             </div>
      
             <div style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
